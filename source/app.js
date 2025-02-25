@@ -21,7 +21,9 @@ setUpMiddleware(app);
 
 //--------------------------------------------------
 //Establece ruta por defecto
-
+app.get('/',(req,res)=>{
+  res.redirect('/v1/home');
+})
 
 //--------------------------------------------------
 //Establece rutas a utilizar
