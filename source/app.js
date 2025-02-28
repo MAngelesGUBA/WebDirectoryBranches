@@ -6,6 +6,7 @@ const path = require('path');
 const setUpMiddleware = require('./middlewares/index');
 //Importa las rutas a utilizar
 const generalRoutes = require('./routes/v1/generalRoutes');
+const adminExtensionRoutes = require('./routes/v1/adminExtensionRoutes');
 
 //Define una instancia de express
 const app = express ();
@@ -28,5 +29,6 @@ app.get('/',(req,res)=>{
 //--------------------------------------------------
 //Establece rutas a utilizar
 app.use('/v1',generalRoutes);
+app.use('/v1/admin',adminExtensionRoutes);
 
 module.exports = app;

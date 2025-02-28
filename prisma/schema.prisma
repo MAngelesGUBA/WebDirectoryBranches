@@ -13,18 +13,25 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Branch{
+  id            Int          @id @default(autoincrement())
+  branchName    String       @db.Text
+  extensions    Extension[]
+}
+
 model Area{
-  id              Int     @id @default(autoincrement())
-  areaName        String  @db.Text
-  extension              Extension[]
+  id            Int         @id @default(autoincrement())
+  areaName      String      @db.Text
+  extensions    Extension[]
 }
 
 model Extension{
-  id                  Int     @id @default(autoincrement())
-  employeeName        String  @db.Text
-  fk_idArea           Int
-  position            String  @db.Text
-  numExtension        Int     @unique
-  area                Area    @relation(fields:[fk_idArea], references:[id])
+  id              Int        @id @default(autoincrement())
+  fk_idBranch     Int
+  employeeName    String     @db.Text
+  fk_idArea       Int
+  position        String     @db.Text
+  extension       Int        @unique
+  area            Area       @relation(fields:[fk_idArea], references:[id])
+  branch          Branch     @relation(fields:[fk_idBranch], references:[id])
 }
-
