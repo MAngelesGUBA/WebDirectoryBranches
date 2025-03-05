@@ -1,4 +1,24 @@
 extends ../layouts/mainLayout
-block content 
-  main
-    h2 Está desplegado en vercel
+
+block content
+  section#catalogo
+    .sucursales 
+      h2 Sucursales
+      button(type='button' onclick="window.location.href='/admin/extensions/colima'" aria-label='extensiones de la sucursal Colima') 
+        img(src='/assets/images/sucursalColima.jpg' alt='Sucursal Colima')
+        p Sucursal Colima
+      button(type='button' onclick="window.location.href='/admin/extensions/manzanillo'" aria-label='extensiones de la sucursal Manzanillo')
+        img(src='/assets/images/sucursalManzanillo.jpg' alt='Sucursal Manzanillo')
+        p Sucursal Manzanillo
+      button(type='button' onclick="window.location.href='/admin/extensions/tecoman'" aria-label='extensiones de la sucursal Tecoman')
+        img(src='/assets/images/sucursalTecoman.jpg' alt='Sucursal Tecomán')
+        p Sucursal Tecomán
+      button(type='button' onclick="window.location.href='/admin/extensions/villa'" aria-label='extensiones de la sucursal Villa de Álvarez')
+        img(src='/assets/images/sucursalVilla.jpg' alt='Sucursal Villa de Álvarez')
+        p Sucursal Villa de Álvarez
+      button(type='button' onclick="window.location.href='/admin/extensions/guzman'" aria-label='extensiones de la sucursal Guzmán')
+        img(src='/assets/images/sucursalGuzman.jpg' alt='Sucursal Guzmán')
+        p Sucursal Guzmán
+      button(type='button' onclick="window.location.href='/admin/extensions/autlan'" aria-label='extensiones de la sucursal Autlán')
+        img(src='/assets/images/sucursalAutlan.jpg' alt='Sucursal Autlán')
+        p Sucursal Autlán

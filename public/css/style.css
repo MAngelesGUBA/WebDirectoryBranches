@@ -1,0 +1,807 @@
+/* FUENTES - Definición de las fuentes personalizadas de Nissan */
+@font-face {
+  font-family: "Nissan Brand Bold";
+  src: url("../fonts/Nissan Brand Bold.otf");
+}
+@font-face {
+  font-family: "Nissan Brand Light";
+  src: url("../fonts/Nissan Brand Light.otf");
+}
+@font-face {
+  font-family: "Nissan Brand Regular";
+  src: url("../fonts/Nissan Brand Regular.otf");
+}
+
+/* VARIABLES - Definición de colores y tipografías reutilizables */
+:root {
+  /*COLORES NISSAN ------------------*/
+  --black-nissan: #020A0D;
+  --white-nissan: #F4F5F7;
+  --gray-nissan: #EFEFEF;
+  --red-nissan: #C3002F;
+  --update-button: #ffb302; 
+  --delete-button: #EC3640; 
+  --icons: #F4F5F7; 
+  /*FUENTES NISSAN -------------------*/
+  --font-headers-titles: "Nissan Brand Bold";
+  --font-body: "Nissan Brand Regular";
+  --font-footer-adds: "Nissan Brand Light";
+}
+
+/* GENERALES - Estilos globales para la página */
+html{
+  position: relative; /* Permite que el footer se posicione correctamente */
+  min-height: 100%; /* Asegura que la página ocupe toda la altura disponible */
+}
+body {
+  display: flex; /* Hace que el body se comporte como un contenedor flex */
+  flex-direction: column; /* Organiza los elementos en columna */
+  min-height: 100vh; /* Asegura que el body ocupe el 100% del viewport */
+  margin: 0;
+  padding: 0;
+  background-color: var(--gray-nissan);
+  font-family: var(--font-body);
+}
+
+footer {
+  display: flex;
+  justify-content: center; /* Centra los elementos horizontalmente */
+  align-items: center; /* Centra los elementos verticalmente */
+  color: var(--white-nissan);
+  
+}
+
+header {
+  background-color: var(--red-nissan);
+  box-shadow: -1px 5px 7px -1px var(--black-nissan); /* Sombra sutil para resaltar el header */
+  display: flex;
+  justify-content: space-between; /* Distribuye el espacio entre los elementos */
+  align-items: center; /* Centra los elementos verticalmente */
+  padding: 10px 20px; /* Añade algo de espacio para que no se vea tan pegado */
+  color: var(--white-nissan);
+  height: 75px;
+}
+
+header h1 {
+  font-family: var(--font-headers-titles);
+  font-size: 41.5px;
+  margin: 0; /* Elimina margen por defecto */
+  flex: 1; /* Hace que el h1 ocupe el espacio disponible y se centre */
+  text-align: center; /* Centra el texto dentro del h1 */
+}
+
+header button {
+  color: var(--white-nissan);
+  font-family: var(--font-headers-titles);
+  font-size: 41.5px;
+  margin: 0; /* Elimina margen por defecto */
+  margin-right: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap; /* Evita que el texto "Home" se rompa en varias líneas */
+  background-color: var(--red-nissan);
+  border: none; 
+  cursor: pointer;
+}
+
+footer {
+  position: relative;
+  height: 55px;
+  width: 100%;
+  margin-top: auto; /* Empuja el footer al final de la página */
+  bottom: 0;
+  background-color: var(--black-nissan);
+  font-family: var(--font-footer-adds);
+}
+
+main{
+  flex: 1; /* Permite que el contenido principal ocupe el espacio restante */
+  display: flex; /* Permite centrar su contenido */
+  align-items: center; /* Centra verticalmente */
+  justify-content: center; /* Centra horizontalmente */
+}
+
+/* SUCURSALES - Estilos para la sección de sucursales */
+#catalogo{
+  width: 90%;
+  padding: 20px;
+  margin: 0 auto; /* Centra el catálogo */
+  box-sizing: border-box; /* Asegura que el padding no afecte el tamaño total */
+}
+
+.sucursales {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 28px;
+  padding: 30px;
+  margin: 30px;
+  background-color: var(--white-nissan);
+  box-shadow: -3px 3px 32px -11px rgba(0, 0, 0, 0.4);
+  border-radius: 13px;
+  box-sizing: border-box;
+}
+
+.sucursales h2 {
+  width: 100%;
+  text-align: center;
+  font-family: var(--font-headers-titles);
+  font-size: 32px;
+  letter-spacing: 3px;
+  margin: 5px;
+}
+
+.sucursales button {
+  position: relative;
+  height: 310px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid var(--gray-nissan);
+  border-radius: 4px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s;
+  flex: 0 1 calc(33.333% - 20px); /* 3 columnas en desktop */
+}
+
+.sucursales button img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.sucursales button p {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  margin: 0;
+  padding: 10px;
+  background-color: var(--black-nissan);
+  color: var(--white-nissan);
+  text-align: center;
+  font-size: 19px;
+}
+
+.sucursales button:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px var(--black-nissan);
+  border: 0;
+}
+
+
+/* ESTILOS PARA LA VISTA DE GESTIÓN DE EXTENSIONES */
+/* ESTILOS PARA BÚSQUEDA */
+.search-container {
+  width: 90%;
+  margin: 20px;
+  padding: 15px;
+  background-color: var(--gray-nissan);
+  border-radius: 8px;
+  
+}
+
+.search-container form{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width:100%;
+}
+
+.search-container input {
+  width: 100%; /* Aumentado para que coincida con el ancho del formulario */
+  height: 40px;
+  padding: 20px;
+  border: 1px solid var(--black-nissan);
+  border-radius: 5px;
+  font-family: var(--font-body);
+  font-size: 16px;
+  box-sizing: border-box;
+  margin-right: 15px;
+}
+
+.search-container input:focus {
+  outline: none;
+  box-shadow: 0 0 5px var(--black-nissan);
+}
+
+.search-container button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 5px;
+  background-color: var(--black-nissan);
+  color: var(--white-nissan);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 40px;
+  height: 40px;
+}
+
+#admin-extensions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  margin: 60px auto;
+  padding: 35px;
+  background-color: var(--white-nissan);
+  box-shadow: 0px 4px 10px var(--black-nissan);
+  border-radius: 10px;
+}
+#admin-extensions h1, #admin-extensions h2 {
+  font-family: var(--font-headers-titles);
+  color: var(--black-nissan);
+  text-align: center;
+  margin:0px; 
+}
+
+.form-actions-extensions {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 90%;
+  padding: 20px;
+  background-color: var(--gray-nissan);
+  border-radius: 8px;
+  margin: 30px; 
+  padding:30px; 
+}
+
+.form-actions-extensions form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 10px;
+}
+
+.form-actions-extensions label {
+  font-family: var(--font-body);
+  font-weight: bold;
+}
+
+.form-actions-extensions input {
+  padding: 10px;
+  border: 1px solid var(--black-nissan);
+  border-radius: 5px;
+}
+
+.form-actions-extensions button {
+  padding: 10px 15px;
+  background-color: var(--red-nissan);
+  color: var(--white-nissan);
+  font-family: var(--font-headers-titles);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
+  width: 35%; 
+  align-self: center;
+}
+
+button:disabled,
+button[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
+
+.form-actions-extensions select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--black-nissan);
+  border-radius: 5px;
+  font-family: var(--font-body);
+  background-color: var(--white-nissan);
+  color: var(--black-nissan);
+  cursor: pointer;
+}
+
+.form-actions-extensions button:hover {
+  background-color: var(--black-nissan);
+}
+
+
+/* ESTILOS PARA LA TABLA */
+.data-table {
+  width: 95%;
+  margin-top: 20px;
+  table-layout: fixed;
+}
+
+.data-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Estilos generales de celdas y encabezados */
+.data-table th,
+.data-table td {
+  padding: 10px;
+  border: 1px solid var(--black-nissan);
+  vertical-align: middle;
+  text-align: center;
+  height: 100%;
+}
+#user-extensions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  height: 550px;
+  margin: 60px auto;
+  padding: 35px;
+  background-color: var(--white-nissan);
+  box-shadow: 0px 4px 10px var(--black-nissan);
+  border-radius: 10px;
+}
+/* ESTILOS PARA LA TABLA - Vista Usuario */
+#user-extensions .data-table {
+  width: 95%;
+  margin: 20px auto;
+  table-layout: fixed;
+}
+
+#user-extensions .data-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Estilos generales de celdas y encabezados */
+#user-extensions .data-table th,
+#user-extensions .data-table td {
+  padding: 10px;
+  border: 1px solid var(--black-nissan);
+  vertical-align: middle;
+  text-align: center;
+  height: 100%;
+}
+
+
+/* Encabezados */
+.data-table th {
+  background-color: var(--black-nissan);
+  color: var(--white-nissan);
+  font-family: var(--font-headers-titles);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 90%;
+  border-bottom: 2px solid var(--white-nissan);
+}
+/* Encabezados */
+#user-extensions .data-table th {
+  background-color: var(--black-nissan);
+  color: var(--white-nissan);
+  font-family: var(--font-headers-titles);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 90%;
+  border-bottom: 2px solid var(--white-nissan);
+}
+
+/* Filas alternas y hover */
+.data-table tr:nth-child(even) {
+  background-color: #efefef;
+}
+/* Filas alternas y hover */
+#user-extensions .data-table tr:nth-child(even) {
+  background-color: #efefef;
+}
+
+
+/* Estilos generales de celdas */
+.data-table td {
+  font-family: var(--font-body);
+}
+/* Estilos generales de celdas */
+#user-extensions .data-table td {
+  font-family: var(--font-body);
+}
+
+
+/* Ajuste de la columna de acciones para que mantenga el tamaño */
+.data-table td.action-column {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  min-height: 50px; /* Asegura altura uniforme */
+  border-left: 0px;
+  border-top: 0px;
+}
+
+/* Botones */
+.data-table button {
+  padding: 5px 10px;
+  margin: 0 5px; /* Espaciado entre botones */
+  border: none;
+  background-color: var(--red-nissan);
+  color: var(--white-nissan);
+  font-family: var(--font-body);
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.data-table .btn-update-data {
+  background-color: var(--update-button);
+}
+
+.data-table .btn-delete-data {
+  background-color: var(--delete-button);
+}
+
+/* Estilos para inputs y selects */
+.data-table input,
+.data-table select {
+  width: 90%; /* Ajusta el tamaño a tu preferencia */
+  padding: 5px;
+  border: 1px solid var(--white-nissan);
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: var(--font-body);
+  text-align: center;
+  display: block;
+  margin: 0 auto; /* Esto asegura que los inputs y selects estén centrados */
+  box-sizing: border-box;
+}
+
+/* Forzar la alineación centrada incluso cuando el input o select pierde el enfoque */
+.data-table input:focus,
+.data-table select:focus {
+  text-align: center !important; /* Mantiene la alineación centrada incluso al enfocar */
+  caret-color: transparent; /* Oculta el cursor para evitar que mueva el texto */
+}
+
+/* Asegurar que los span también estén centrados */
+.data-table span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  font-size: 16px;
+  font-family: var(--font-body);
+  text-align: center;
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+.btn-save-data,
+.btn-cancel-data {
+  margin: 0 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 4px;
+}
+
+.btn-cancel-data {
+  background-color: #dc3545;
+}
+
+
+/* Diseño responsivo general */
+/* móvil */
+@media screen and (max-width: 768px) {
+  header h1 {
+      font-size: 30px;
+      padding: 10px;
+  }
+  #user-extensions,
+  #admin-extensions {
+    width: 85%;
+    height: auto;
+    margin: 30px auto;
+    padding: 20px;
+    border-radius: 8px;
+  }
+  
+  #user-extensions h1 {
+    font-family: var(--font-headers-titles);
+    font-size: 36px;
+    margin: 0 0 20px 0;
+    text-align: center;
+    color: var(--black-nissan);
+  }
+  
+
+  #catalogo {
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 90%;
+      margin: 60px auto;
+      padding: 35px;
+      background-color: var(--white-nissan);
+      box-shadow: 0px 4px 10px var(--black-nissan);
+      border-radius: 10px;
+  }
+
+  .sucursales h2 {
+      font-size: 24px;
+  }
+
+  .sucursales {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+  }
+
+  .sucursales button {
+      flex: 0 1 calc(33.333% - 15px); /* 3 columnas en móviles */
+      height: 250px;
+  }
+
+  .sucursales button p {
+      font-size: 16px;
+      padding: 8px;
+  }
+
+  .search-container {
+      width: 95%;
+      padding: 10px;
+      margin: 10px auto;
+      display: flex;
+      margin-right: 15px;
+  }
+  #user-extensions .search-container {
+    width: 90%;
+    margin: 20px auto;
+    padding: 15px;
+    background-color: var(--gray-nissan);
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }  
+
+  .search-container input {
+      width: 100%;
+      padding: 10px;
+      margin-right: 10px;
+      height: 42px;
+  }
+
+  .search-container button {
+      width: 40px;
+      height: 40px;
+      padding: 8px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  }
+  /* Convierte la tabla en un diseño de bloque para hacerla responsiva */
+#no-more-tables table,
+#no-more-tables thead,
+#no-more-tables tbody,
+#no-more-tables th,
+#no-more-tables td,
+#no-more-tables tr {
+  display: block;
+}
+
+
+/* Oculta el encabezado de la tabla en pantallas pequeñas */
+#no-more-tables thead tr {
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+}
+
+/* Aplica estilos generales a las filas de la tabla */
+#no-more-tables tr {
+  border: 1px solid var(--black-nissan);
+  margin-bottom: 10px;
+  background-color: var(--white-nissan);
+}
+
+/* Estilos para las celdas de la tabla */
+#no-more-tables td {
+  border: none;
+  border-bottom: 1px solid var(--black-nissan); /* Línea divisoria entre filas */
+  position: relative;
+  padding-left: 50%; /* Espacio para el pseudo-elemento */
+  white-space: normal;
+  text-align: left;
+  min-height: 45px;
+  display: flex;
+  align-items: center; /* Alinea verticalmente el contenido */
+}
+
+/* Agrega un pseudo-elemento que muestra el nombre del campo en móviles */
+#no-more-tables td:before {
+  position: absolute;
+  left: 6px;
+  width: 45%; /* Ancho del label */
+  padding-right: 10px;
+  white-space: nowrap;
+  text-align: left;
+  font-family: var(--font-headers-titles);
+  content: attr(data-title); /* Muestra el nombre del campo definido en HTML */
+  font-size: 18px;
+}
+
+/* Estilos específicos para la columna de acciones */
+#no-more-tables td.action-column {
+  padding-left: 20%; /* Mantiene alineación con otras celdas */
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  display: flex;
+  align-items: left;
+  gap: 10px;
+  min-height: 50px;
+  border-bottom: none;
+}
+
+/* Ajusta la etiqueta en la columna de acciones */
+#no-more-tables td.action-column:before {
+  content: attr(data-title);
+  position: absolute;
+  left: 6px;
+  width: 45%;
+  padding-right: 10px;
+  white-space: nowrap;
+  text-align: left;
+  font-family: var(--font-headers-titles);
+  font-size: 18px;
+}
+
+/* Estilos específicos para inputs y selects dentro de la tabla en móviles */
+#no-more-tables td input,
+#no-more-tables td select {
+  width: 100%;
+  margin-left: 0;
+  min-width: unset;
+  font-size: 16px;
+  font-family: var(--font-body);
+}
+
+/* Asegura que los spans dentro de las celdas ocupen todo el ancho */
+#no-more-tables td span {
+  width: 100%;
+  text-align: left;
+  font-family: var(--font-body);
+  display: block;
+}
+
+/* Ajustes para campos editables dentro de la tabla */
+#no-more-tables td.editable-cell {
+  padding-right: 18px;
+}
+
+/* Ajusta inputs y selects dentro de celdas editables */
+#no-more-tables td input[type="text"],
+#no-more-tables td input[type="number"],
+#no-more-tables td select {
+  flex: 1;
+  margin-left: 0; 
+  max-width: 70%;
+}
+
+/* Diseño responsivo para la tabla */
+#user-extensions h1 {
+  font-size: 30px;
+  padding: 10px;
+}
+/* Diseño responsivo para la tabla */
+#user-extensions h2 {
+  font-size: 30px;
+  padding: 10px;
+}
+
+#user-extensions .search-container {
+  width: 95%;
+  padding: 10px;
+  margin: 10px auto;
+  display: flex;
+  margin-right: 15px;
+}
+/* Convierte la tabla en un diseño de bloque para hacerla responsiva */
+#user-extensions #no-more-tables table,
+#user-extensions #no-more-tables thead,
+#user-extensions #no-more-tables tbody,
+#user-extensions #no-more-tables th,
+#user-extensions #no-more-tables td,
+#user-extensions #no-more-tables tr {
+  display: block;
+}
+
+/* Oculta el encabezado de la tabla en pantallas pequeñas */
+#user-extensions #no-more-tables thead tr {
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+}
+
+/* Aplica estilos generales a las filas de la tabla */
+#user-extensions #no-more-tables tr {
+  border: 1px solid var(--black-nissan);
+  margin-bottom: 10px;
+  background-color: var(--white-nissan);
+}
+
+/* Estilos para las celdas de la tabla */
+#user-extensions #no-more-tables td {
+  border: none;
+  border-bottom: 1px solid var(--black-nissan); /* Línea divisoria entre filas */
+  position: relative;
+  padding-left: 50%; /* Espacio para el pseudo-elemento */
+  white-space: normal;
+  text-align: left;
+  min-height: 45px;
+  display: flex;
+  align-items: center; /* Alinea verticalmente el contenido */
+}
+
+/* Agrega un pseudo-elemento que muestra el nombre del campo en móviles */
+#user-extensions #no-more-tables td:before {
+  position: absolute;
+  left: 6px;
+  width: 45%; /* Ancho del label */
+  padding-right: 10px;
+  white-space: nowrap;
+  text-align: left;
+  font-family: var(--font-headers-titles);
+  content: attr(data-title); /* Muestra el nombre del campo definido en HTML */
+  font-size: 18px;
+}
+
+/* Asegura que los spans dentro de las celdas ocupen todo el ancho */
+#user-extensions #no-more-tables td span {
+  width: 100%;
+  text-align: left;
+  font-family: var(--font-body);
+  display: block;
+}
+}
+
+/* Desktop */
+@media screen and (min-width: 1440px) {
+  #catalogo {
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 90%;
+      margin: 60px auto;
+      padding: 35px;
+      background-color: var(--white-nissan);
+      box-shadow: 0px 4px 10px var(--black-nissan);
+      border-radius: 10px;
+    
+  }
+
+  .sucursales {
+    gap: 28px;
+  }
+
+  .sucursales button {
+    flex: 0 1 calc(33.333% - 20px);
+    height: 310px;
+  }
+
+  .sucursales h2 {
+    font-size: 32px;
+  }
+
+  .search-container {
+    padding: 20px;
+    display: flex;
+    margin-right: 20px;
+  }
+}
+

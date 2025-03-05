@@ -1,22 +1,38 @@
 const {PrismaClient} = require('@prisma/client');
 const prisma = new PrismaClient();
 
-
-/* C R U D --> EXTENSIONS ---------------------------------*/
+// ----------------------------------------------------------------------
+//VALIDACIONES
+/**
+ * 
+ * @param {number} id - id Extension to find 
+ * @returns {Promise<object|null>} existing record | null
+ * @throws {Error} throw an error if it happens
+ */
+const findExtensionById = async (id) => {
+  try {
+    const extension = await prisma.extension.findUnique({
+      where: { id: Number(id)}
+    });
+    return extension;
+  } catch (error) {
+    throw error;
+  }
+};
 
 /**
  * 
- * @param {number} Extension to verify
+ * @param {number} extension - Number extension to verify
  * @returns {Promise<object|null>} existing record | null
  * @throws {Error} throw an error if it happens
  */
 //Validación de extensión ######################
-const findByExtension = async (extension) =>{
+const findByNumExtension = async (numExtension) =>{
   try{
     const existExtension = await prisma.extension
     .findUnique({
       where:{
-        extension:extension
+        extension:numExtension
       }
     });
     return existExtension; 
@@ -25,9 +41,39 @@ const findByExtension = async (extension) =>{
   }
 }
 
+/* C R U D --> EXTENSIONS ---------------------------------*/
+
+/**
+ * @param {string} query - query to search
+ * @returns {Promise<object[]>} existing record | null
+ * @throws {Error} throw an error if it happens
+ */
+//Obetener extensiones ***********************
+const getExtension = async (search) =>{
+  try{
+    const area = await prisma.extension.findMany({
+      where:{
+        OR: [
+          {employeeName: {contains: search, mode: 'insensitive'}},
+          {position: {contains: search, mode: 'insensitive'}},
+          {area:{areaName: {contains: search, mode: 'insensitive'}}},
+          {branch:{branchName:{contains:search, mode:'insensitive'}}}
+        ]
+      },
+      include:{
+        area:true,
+        branch:true
+      } 
+    })
+    return area;
+  }catch(error){
+    throw error;
+  }
+}
+
 /**
  * 
- * @param {object} dataExtension 
+ * @param {object} dataExtension - data to insert
  * @returns {Promise<number>} id of new extension
  * @throws {Error} throw an error if it happens
  */
@@ -42,8 +88,45 @@ const insertExtension = async (dataExtension)=>{
   }
 }
 
+//Actaulización de una extensión *********************
+const updateExtension = async(id,extension) =>{
+  try{
+    const updateData = await prisma.extension
+      .update({
+        where:{id:Number(id)},
+        data:extension
+      }); 
+      return updateData.id;
+  }catch(error){
+    throw error;
+  }
+};
+
+/**
+ * 
+ * @param {number} id - Extension to delete
+ * @returns {Promise<number>} id of the deleted extension
+ * @throws {Error} throw an error if it happens
+ */
+//Eliminación de una extensión *********************
+const deleteExtension = async(id) =>{
+  try{
+    const deleteExtension = await prisma.extension
+      .delete({
+        where:{id:Number(id)}
+      });
+      return deleteExtension.id;
+  }catch(error){
+    throw error;
+  }
+};
+
 module.exports = {
-  findByExtension,
-  insertExtension
+  findByNumExtension,
+  findExtensionById,
+  getExtension,
+  insertExtension,
+  updateExtension,
+  deleteExtension
 }
 

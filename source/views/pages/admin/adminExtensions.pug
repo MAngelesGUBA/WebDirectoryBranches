@@ -1,0 +1,54 @@
+extends ../../layouts/mainLayout
+
+block content
+  if isAuthenticated
+    a(href="/logout") Logout
+  else
+    a(href="/login") Login
+  section#admin-extensions
+    h1 Gestión de Extensiones 
+
+    // Formulario para agregar una nueva extensión
+    .form-actions-extensions
+      form(id='frmExtension' method='post')
+        // Sucursal como select
+        label(for='sucursal') Sucursal
+        select(id='sucursal' name='branch' required)
+
+        label(for='name') Nombre
+        input(type='text' id='name' name='employee' placeholder='ej. Juan Perez' required)
+
+        label(for="area") Área 
+        select(id='area' name='area' required)
+
+        label(for="position") Puesto
+        input(type='text' id='position' name='position' placeholder='ej. ADPC' required)
+
+        label(for="extension") Extensión
+        input(type="number" id='extension' name='extension' placeholder='ej. 1040' required)
+
+        button(type='submit' id='btnSendExtension') Agregar Extensión
+
+    // Lista de extensiones existentes con diseño responsivo
+    h2 Lista de Extensiones
+    // Barra de búsqueda
+    .search-container
+      form(id='frmSearch', method='get')
+        input(type='text' id='searchInput' name='search' placeholder='Buscar por nombre, sucursal, área, puesto...')
+        button(type='submit' id='btnSearch' aria-label="Buscar") 
+          svg(xmlns="http://www.w3.org/2000/svg" id="Isolation_Mode" data-name="Isolation Mode" viewBox="0 0 24 24" width="30" height="30" fill='#FFFFFF')
+            path(d="M18.9,16.776A10.539,10.539,0,1,0,16.776,18.9l5.1,5.1L24,21.88ZM10.5,18A7.5,7.5,0,1,1,18,10.5,7.507,7.507,0,0,1,10.5,18Z")
+
+    #no-more-tables.data-table
+      table
+        thead
+          tr
+            th Sucursal
+            th Nombre
+            th Área
+            th Puesto
+            th Extensión
+            th.action-column Acciones
+        tbody#bodyExtensions
+
+    script(src='/assets/js/adminExtensions.js') 

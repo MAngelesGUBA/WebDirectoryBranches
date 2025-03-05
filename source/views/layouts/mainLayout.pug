@@ -1,10 +1,32 @@
 doctype html
-html(lang='es')
+html(lang='es') <!--Define el lenguaje de la pagina-->
   head
-    meta(charset='uft-8')
+    // Metadatos SEO
+    meta(charset='utf-8')
     meta(name='viewport' content='width=device-width, initial-scale=1.0')
-    title Directory
+    meta(name='descripcion' content=seo.descripcion)
+    meta(name='robots' content='NOINDEX, NOFOLLOW')
+    title= `${title} - ExtNissan`
+    
+    // Metadatos OG para redes sociales
+    meta(property='og:title' content=title + ' - ExtNissan')
+    meta(property='og:type' content=seo.type)
+    meta(property='og:description' content=seo.descripcion)
+    meta(property='og:locale' content=seo.locale)
+    meta(property='og:site' content=seo.site)
+    meta(property='og:image' content=seo.image)
+    
+    // Enlace a los estilos
+    link(rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css")
+    link(rel="stylesheet" href="/assets/css/style.css")
+
   body
+    // Importa el header
     include ../partials/header
-    block content
+
+    // Contenido principal
+    main
+      block content
+
+    // Importa el footer
     include ../partials/footer
