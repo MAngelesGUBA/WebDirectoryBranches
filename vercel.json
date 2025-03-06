@@ -12,7 +12,10 @@
       "dest":"source/app.js"
     }
   ],
-  "scripts":{
-    "postinstall": "prisma generate"
+  "scripts": [
+    {
+      "postinstall": "prisma generate",
+      "start": "node source/app.js"
   }
+  ]
 }
