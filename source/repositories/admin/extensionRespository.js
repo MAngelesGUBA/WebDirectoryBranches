@@ -44,6 +44,40 @@ const findByNumExtension = async (numExtension) =>{
 /* C R U D --> EXTENSIONS ---------------------------------*/
 
 /**
+ * 
+ * @param {string} search - query to search
+ * @returns {Promise<object[]>} existing record | null
+ * @throws {Error} throw an error if it happens
+ */
+const getBranchExtension = async (param,search)=>{
+  try{
+    const branchExtension = await prisma.extension.findMany({
+      select:{
+        employeeName:true,
+        area:{areaName:true},
+        position:true,
+        extension:true
+      },
+      where:{
+        OR:[
+          {employeeName: {contains: search, mode: 'insensitive'}},
+          {position: {contains: search, mode: 'insensitive'}},
+          {area:{areaName: {contains: search, mode: 'insensitive'}}},
+          {branch:{branchName:{contains:param, mode:'insensitive'}}}
+        ]
+      },
+      include:{
+        area:true,
+        branch:true
+      }
+    });
+    return branchExtension;
+  }catch(error){
+    throw error;
+  }
+}
+
+/**
  * @param {string} query - query to search
  * @returns {Promise<object[]>} existing record | null
  * @throws {Error} throw an error if it happens
@@ -51,7 +85,7 @@ const findByNumExtension = async (numExtension) =>{
 //Obetener extensiones ***********************
 const getExtension = async (search) =>{
   try{
-    const area = await prisma.extension.findMany({
+    const extension = await prisma.extension.findMany({
       where:{
         OR: [
           {employeeName: {contains: search, mode: 'insensitive'}},
@@ -65,7 +99,7 @@ const getExtension = async (search) =>{
         branch:true
       } 
     })
-    return area;
+    return extension;
   }catch(error){
     throw error;
   }
@@ -125,6 +159,7 @@ module.exports = {
   findByNumExtension,
   findExtensionById,
   getExtension,
+  getBranchExtension,
   insertExtension,
   updateExtension,
   deleteExtension

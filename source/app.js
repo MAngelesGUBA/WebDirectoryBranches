@@ -8,6 +8,8 @@ const setUpMiddleware = require('./middlewares/index');
 //Importa las rutas a utilizar
 const generalRoutes = require('./routes/v1/generalRoutes');
 const adminExtensionRoutes = require('./routes/v1/adminExtensionRoutes');
+const userExtensionRoutes = require('./routes/v1/userExtensionRoutes');
+//Importa el modulo de autenticación
 const {auth} = require('express-openid-connect');
 
 const config = {
@@ -58,6 +60,7 @@ app.get('/logout', (req, res) => {
 //Establece rutas a utilizar
 app.use('/v1',generalRoutes);
 app.use('/v1/admin',adminExtensionRoutes);
+app.use('/v1/user',userExtensionRoutes);
 
 
 

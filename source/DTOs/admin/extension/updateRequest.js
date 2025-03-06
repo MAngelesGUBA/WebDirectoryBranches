@@ -11,12 +11,12 @@ class UpdateRequest extends Validation{
     //Ejecuta el constructor de la clase padre y le pasa el schema de validacion
     super(schema)
     //Asigna a cada propiedad el valor correspondiente recibido en la peticion
-    this.id = params.id;
-    this.fk_idBranch = body.branch;
+    this.id = Number(params.id);
+    this.fk_idBranch = Number(body.branch);
     this.employeeName = body.employee;
-    this.fk_idArea = body.area;
+    this.fk_idArea = Number(body.area);
     this.position = body.position;
-    this.extension = body.extension;
+    this.extension = Number(body.extension);
   }
 
   /**

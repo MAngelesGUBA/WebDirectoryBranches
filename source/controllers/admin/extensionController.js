@@ -111,6 +111,7 @@ const updateExtension = async(req, res) =>{
     const updatedId = await extensionRepository.updateExtension(dtoUpdate.getUpdateIdData(), dataUpdate);
     return response.sendResponse(200, 'Extensión actualizada', {id:updatedId}); 
   }catch(error){
+    console.log(error);
     return response.sendErrorMessage(500, 'Error interno del servidor', error.message);
   }
 }
