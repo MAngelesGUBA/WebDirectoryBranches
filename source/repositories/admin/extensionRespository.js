@@ -52,25 +52,23 @@ const findByNumExtension = async (numExtension) =>{
 const getBranchExtension = async (param,search)=>{
   try{
     const branchExtension = await prisma.extension.findMany({
-      select:{
-        employeeName:true,
-        area:{areaName:true},
-        position:true,
-        extension:true
-      },
-      where:{
-        OR:[
-          {employeeName: {contains: search, mode: 'insensitive'}},
-          {position: {contains: search, mode: 'insensitive'}},
-          {area:{areaName: {contains: search, mode: 'insensitive'}}},
-          {branch:{branchName:{contains:param, mode:'insensitive'}}}
+      where: {
+        AND: [
+          { branch: { branchName: { contains: param, mode: 'insensitive' } } },
+          {
+            OR: [
+              { employeeName: { contains: search, mode: 'insensitive' } },
+              { position: { contains: search, mode: 'insensitive' } },
+              { area: { areaName: { contains: search, mode: 'insensitive' } } }
+            ]
+          }
         ]
       },
       include:{
         area:true,
         branch:true
-      }
-    });
+      } 
+    })
     return branchExtension;
   }catch(error){
     throw error;
