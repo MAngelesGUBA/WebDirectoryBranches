@@ -16,11 +16,11 @@ const config = {
   authRequired: false,
   auth0Logout: true,
   secret: process.env.CLIENT_SECRET,
-  baseURL: 'http://localhost:3005',
+  baseURL: 'http://localhost:3005' || process.env.BASE_URL,
   clientID: process.env.CLIENT_ID,
   issuerBaseURL: process.env.DOMAIN,
   routes: {
-    postLogoutRedirect: 'http://localhost:3005/v1/admin/viewAdmin'
+    postLogoutRedirect: 'http://localhost:3005/v1/admin/viewAdmin' || process.env.POST_LOGOUT_REDIRECT
   }
 };
 
