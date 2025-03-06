@@ -11,5 +11,8 @@
       "src":"/(.*)",
       "dest":"source/app.js"
     }
-  ]
+  ],
+  "scripts":{
+    "postinstall": "prisma generate"
+  }
 }
