@@ -2,6 +2,7 @@
 CREATE TABLE "Branch" (
     "id" SERIAL NOT NULL,
     "branchName" TEXT NOT NULL,
+    "branchName_Unaccent" TEXT NOT NULL,
 
     CONSTRAINT "Branch_pkey" PRIMARY KEY ("id")
 );
@@ -10,6 +11,7 @@ CREATE TABLE "Branch" (
 CREATE TABLE "Area" (
     "id" SERIAL NOT NULL,
     "areaName" TEXT NOT NULL,
+    "areaName_Unaccent" TEXT NOT NULL,
 
     CONSTRAINT "Area_pkey" PRIMARY KEY ("id")
 );

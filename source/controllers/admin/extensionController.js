@@ -16,26 +16,6 @@ const viewAdmin = (req, res)=>{
 
 // EXTENSION -----------------------------------
 
-const getBranchExtension = async(req, res) => {
-  const response = new generalResponse(res);
-  try{
-    console.log(req.params, req.query);
-    const dtoGet = new dtoGetBranchExtension(req.params, req.query);
-    const error = dtoGet.validate();
-    if(error){
-      return response.sendErrorMessage(400, 'Error en la validación de los datos', error);
-    }
-    const branchExtension = await extensionRepository.getBranchExtension(dtoGet.getQuery().param, dtoGet.getQuery().search);
-    if(branchExtension.length === 0){
-      return response.sendErrorMessage(404, 'No se encontraron registros', null);
-    }
-    return response.sendResponse(200, 'Registros encontrados', branchExtension);
-  }catch(error){
-    console.log(error);
-    return response.sendErrorMessage(500, 'Error interno del servidor', error.message);
-  }
-}
-
 const getExtension = async(req, res) =>{
   //Instancia de la clase generalResponse
   const response = new generalResponse(res);
@@ -68,7 +48,6 @@ const getExtension = async(req, res) =>{
 const insertExtension = async(req, res) =>{
   const response = new generalResponse(res);
   try{
-    console.log(req.body);
     const dtoInsert = new dtoInsertExtension(req.body);
     const error = dtoInsert.validate(); 
     const insertData = dtoInsert.getInsertData();
@@ -182,7 +161,6 @@ const getBranch = async(req,res) =>{
 module.exports = {
   viewAdmin,
   getExtension,
-  getBranchExtension,
   insertExtension,
   updateExtension,
   deleteExtension, 

@@ -12,10 +12,12 @@ const API_ENDPOINTS = {
 const fetchData = async (url, options = {}) => {
   try {
     const response = await fetch(url, options);
-    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+    if (!response.ok){
+      const errorData = await response.json();
+      throw new Error(errorData.error || errorData.message || 'Error en la solicitud');
+    }
     return await response.json();
   } catch (error) {
-    console.error('API Error:', error.message);
     throw error;
   }
 };
@@ -83,6 +85,21 @@ class TableManager {
     });
   }
 
+  setInputsData(row) {
+    const elements = ['branch', 'employee', 'area', 'position', 'extension'];
+    elements.forEach(element => {
+      const span = row.querySelector(`.${element}`);
+      const input = row.querySelector(`.t${element.charAt(0).toUpperCase() + element.slice(1)}`);
+      if (input && span) {
+        if (element === 'branch' || element === 'area') {
+          span.dataset.id = input.value;
+          span.textContent = input.querySelector(`option[value="${input.value}"]`).textContent;
+        } else
+          span.textContent = input.value;
+      }
+    });
+  }
+
   toggleActionButtons(row, enable) {
     ['btn-update-data', 'btn-delete-data'].forEach(btnClass => {
       const button = row.querySelector(`.${btnClass}`);
@@ -131,7 +148,9 @@ class TableManager {
 
 // Initialize application
 document.addEventListener('DOMContentLoaded', async () => {
+  let loadingSwal;
   try {
+    loadingSwal = Message.waitingMessage();
     const [branchesHTML, areaHTML] = await Promise.all([getBranch(), getArea()]);
     document.getElementById('sucursal').innerHTML = branchesHTML;
     document.getElementById('area').innerHTML = areaHTML;
@@ -143,7 +162,6 @@ document.addEventListener('DOMContentLoaded', async () => {
       event.preventDefault();
       const buttonSubmit = document.getElementById('btnSendExtension');
       buttonSubmit.disabled = true;
-      
       try {
         const formData = new FormData(event.target);
         const response = await fetchData(API_ENDPOINTS.insertExtension, {
@@ -151,9 +169,10 @@ document.addEventListener('DOMContentLoaded', async () => {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(Object.fromEntries(formData))
         });
-        alert(response.message);
+        Message.successMessage(response.message);
+        event.target.reset();
       } catch (error) {
-        alert('Form submission error: ' + error.message);
+        Message.alertMessage(error.message);
       } finally {
         buttonSubmit.disabled = false;
       }
@@ -162,10 +181,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Search form handler
     document.getElementById('frmSearch').addEventListener('submit', async (event) => {
       event.preventDefault();
+      let loadingSwal;
       try {
+        loadingSwal = Message.waitingMessage("Realizando la búsqueda","Espere un momento...");
         const formData = new FormData(event.target);
         const url = `${API_ENDPOINTS.getExtension}?${new URLSearchParams(Object.fromEntries(formData))}`;
         const { data } = await fetchData(url);
+        event.target.reset();
         document.getElementById('bodyExtensions').innerHTML = data.map(extension => `
           <tr class='editable-row' id='${extension.id}'>
             <td data-title='Sucursal'>
@@ -205,7 +227,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         `).join('');
         tableManager.initializeEvents();
       } catch (error) {
-        alert('Search error: ' + error.message);
+        Message.alertMessage(error.message);
+      }finally{
+        (loadingSwal).close();
       }
     });
 
@@ -228,11 +252,11 @@ document.addEventListener('DOMContentLoaded', async () => {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data)
         });
-        alert(response.message);
-        tableManager.toggleActionButtons(row, false);
+        Message.successMessage(response.message);
+        tableManager.setInputsData(row);
         tableManager.toggleEditMode(row, false);
       } catch (error) {
-        alert('Update error: ' + error.message);
+        Message.alertMessage(error.message);
       }
     });
 
@@ -245,14 +269,16 @@ document.addEventListener('DOMContentLoaded', async () => {
       const url = `${API_ENDPOINTS.deleteExtension}/${row.id}`;
       try {
         const response = await fetchData(url, { method: 'DELETE' });
-        alert(response.message);
+        Message.successMessage(response.message);
         row.remove();
       } catch (error) {
-        alert('Delete error: ' + error.message);
+        Message.alertMessage(error.message);
       }
     });
 
   } catch (error) {
     alert('Initialization error: ' + error.message);
+  }finally{
+    (loadingSwal).close();
   }
 });

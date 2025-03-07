@@ -12,7 +12,6 @@ class Validation{
    */
   _getValidateErrors(data){
     const {error} = this.schema.validate(data, {
-      abortEarly:false,
       //Evita la adicion de propiedades no definidas en el schema
       stripUnknown:true
     });

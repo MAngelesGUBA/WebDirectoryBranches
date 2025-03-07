@@ -14,14 +14,16 @@ datasource db {
 }
 
 model Branch{
-  id            Int          @id @default(autoincrement())
-  branchName    String       @db.Text
+  id                     Int          @id @default(autoincrement())
+  branchName             String       @db.Text
+  branchName_Unaccent    String       @db.Text
   extensions    Extension[]
 }
 
 model Area{
-  id            Int         @id @default(autoincrement())
-  areaName      String      @db.Text
+  id                   Int         @id @default(autoincrement())
+  areaName             String      @db.Text
+  areaName_Unaccent    String      @db.Text
   extensions    Extension[]
 }
 

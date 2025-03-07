@@ -8,9 +8,8 @@ const schema = Joi.object({
     'number.positive': 'La sucursal debe ser un número positivo'
   }),
   employeeName: Joi.string().trim().pattern(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{2,50}$/).required().messages({
-    'string.base': 'El nombre del empleado debe ser una cadena',
     'string.empty': 'El nombre del empleado es requerido', 
-    'string.pattern.base': 'El nombre del empleado debe contener solo letras y espacios'
+    'string.pattern.base': 'El nombre del empleado no debe contener números ni caracteres especiales',
   }),
   fk_idArea: Joi.number().required().integer().positive().messages({
     'any.required': 'El área es requerida',
@@ -23,7 +22,7 @@ const schema = Joi.object({
     'string.base': 'El puesto debe ser una cadena',
     'string.pattern.base': 'El puesto debe contener solo letras y espacios'
   }),
-  extension: Joi.number().required().positive().integer().min(1000).max(7000).messages({
+  extension: Joi.number().required().positive().integer().min(1000).max(6999).messages({
     'any.required': 'La extensión es requerida', 
     'number.base': 'La extensión debe ser un número',
     'number.integer': 'La extensión debe ser un número entero',

@@ -1,5 +1,4 @@
 //Import schema validation
-const { get } = require('../../../routes/v1/adminExtensionRoutes');
 const schema = require('../../../utils/extensionSchema');
 const Validation = require('../../../utils/validationClass');
 
@@ -15,9 +14,9 @@ class InsertRequest extends Validation{
     super(schema);
     //Asigna a cada propiedad el valor correspondiente recibido en la peticion
     this.fk_idBranch = Number(body.branch);
-    this.employeeName = body.employee;
+    this.employeeName = body.employee.trim();
     this.fk_idArea = Number(body.area);
-    this.position = body.position;
+    this.position = body.position.trim();
     this.extension = Number(body.extension);
   }
 

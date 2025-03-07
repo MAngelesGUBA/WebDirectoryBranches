@@ -7,7 +7,7 @@ class GetRequest extends Validation{
    */
   constructor(query){
     super(schema);
-    this.search = query.search;
+    this.search = query.search.trim();
   }
 
   /**

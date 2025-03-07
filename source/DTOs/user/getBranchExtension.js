@@ -10,7 +10,7 @@ class GetBranchExtension extends Validation{
   constructor(params, query){
     super(schema);
     this.param = params.sucursal;
-    this.search = query.search;
+    this.search = query.search.trim();
   }
 
   /**
