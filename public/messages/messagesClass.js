@@ -10,8 +10,8 @@ class Message{
     });
   };
   
-  static successMessage(message){
-    return Swal.fire({
+  static async successMessage(message){
+    return await Swal.fire({
       icon:"success",
       title: "Operación exitosa",
       text: message
@@ -34,14 +34,15 @@ class Message{
     });
   };
 
-  static confirmationMessage(accion){
-    const result = Swal.fire({
-      title: `Esta seguro de ${accion} este registro?`,
-      showDenyButton:true,
-      confirmButtonText: accion,
-      focusDeny:true
+  static async confirmationMessage(accion) {
+    const result = await Swal.fire({
+        title: `¿Está seguro de ${accion} este registro?`,
+        showDenyButton: true,
+        confirmButtonText: accion,
+        denyButtonText: 'Cancelar',
+        focusDeny: true
     });
     return result.isConfirmed;
-  }
+}
 }
 

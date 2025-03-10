@@ -2,6 +2,8 @@ header
   h1 Rancagua Directorio de Extensiones
   nav 
     .menu
+      if isAuthenticated && viewName === 'viewsAdminExtensions'
+        a.logout(href="/logout") Logout
       if viewName !== 'home' && viewName === 'viewUserExtensions'
         a(class='menu-item' onclick="window.location.href='/v1/home'") Home
         .dropdown-container

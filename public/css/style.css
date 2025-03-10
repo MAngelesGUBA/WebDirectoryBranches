@@ -80,6 +80,13 @@ nav .menu{
   align-items: center;
 }
 
+nav .menu .logout{
+  text-decoration: none;
+  color: var(--white-nissan);
+  font-size: 20px;
+  cursor: pointer;
+}
+
 nav .menu a:hover{
   text-decoration: underline;
 }
@@ -308,9 +315,6 @@ main{
   width: 90%;
   margin: 60px auto;
   padding: 35px;
-  background-color: var(--white-nissan);
-  box-shadow: 0px 4px 10px var(--black-nissan);
-  border-radius: 10px;
 }
 #admin-extensions h1, #admin-extensions h2 {
   font-family: var(--font-headers-titles);

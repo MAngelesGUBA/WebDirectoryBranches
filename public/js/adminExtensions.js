@@ -245,36 +245,66 @@ document.addEventListener('DOMContentLoaded', async () => {
         position: row.querySelector('.tPosition').value,
         extension: row.querySelector('.tExtension').value,
       };
-      const url = `${API_ENDPOINTS.updateExtension}/${row.id}`;
+      
+      let loadingSwal;
       try {
+        const confirm = await Message.confirmationMessage('actualizar');
+        if (!confirm) return;
+        
+        loadingSwal = Message.waitingMessage("Actualizando...", "Por favor espere");
+        const url = `${API_ENDPOINTS.updateExtension}/${row.id}`;
         const response = await fetchData(url, {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data)
+          body: JSON.stringify(data),
         });
-        Message.successMessage(response.message);
+    
+        if (loadingSwal) {
+          loadingSwal.close();
+        }
+    
+        // Mostrar el mensaje de éxito
+        await Message.successMessage(response.message);
         tableManager.setInputsData(row);
-        tableManager.toggleEditMode(row, false);
       } catch (error) {
+        if (loadingSwal) {
+          loadingSwal.close();
+        }
         Message.alertMessage(error.message);
       }
     });
 
     // delete button handler
-    document.addEventListener('click', async (event) => {
-      const button = event.target.closest('.btn-delete-data');
-      if (!button) return;
+  document.addEventListener('click', async (event) => {
+    const button = event.target.closest('.btn-delete-data');
+    if (!button) return;
 
-      const row = button.closest('tr');
+    const row = button.closest('tr');
+    let loadingSwal;
+    
+    try {
+      const confirm = await Message.confirmationMessage('eliminar');
+      if (!confirm) return;
+      
+      loadingSwal = Message.waitingMessage("Eliminando...", "Por favor espere");
       const url = `${API_ENDPOINTS.deleteExtension}/${row.id}`;
-      try {
-        const response = await fetchData(url, { method: 'DELETE' });
-        Message.successMessage(response.message);
-        row.remove();
-      } catch (error) {
-        Message.alertMessage(error.message);
+      const response = await fetchData(url, { method: 'DELETE' });
+
+      if (loadingSwal) {
+        loadingSwal.close();
       }
-    });
+
+      // Mostrar mensaje de éxito y esperar a que se cierre
+      await Message.successMessage(response.message);
+      // Eliminar la fila después de que se cierre el mensaje
+      row.remove();
+    } catch (error) {
+      if (loadingSwal) {
+        loadingSwal.close();
+      }
+      Message.alertMessage(error.message);
+    }
+  });
 
   } catch (error) {
     alert('Initialization error: ' + error.message);
