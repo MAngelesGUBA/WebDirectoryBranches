@@ -30,6 +30,7 @@ model Area{
 model Extension{
   id              Int        @id @default(autoincrement())
   fk_idBranch     Int
+  email           String     @db.Text @unique
   employeeName    String     @db.Text
   fk_idArea       Int
   position        String     @db.Text

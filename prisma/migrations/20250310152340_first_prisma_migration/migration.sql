@@ -20,6 +20,7 @@ CREATE TABLE "Area" (
 CREATE TABLE "Extension" (
     "id" SERIAL NOT NULL,
     "fk_idBranch" INTEGER NOT NULL,
+    "email" TEXT NOT NULL,
     "employeeName" TEXT NOT NULL,
     "fk_idArea" INTEGER NOT NULL,
     "position" TEXT NOT NULL,
@@ -27,6 +28,9 @@ CREATE TABLE "Extension" (
 
     CONSTRAINT "Extension_pkey" PRIMARY KEY ("id")
 );
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Extension_email_key" ON "Extension"("email");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Extension_extension_key" ON "Extension"("extension");
