@@ -1,6 +1,5 @@
 const generalResponse = require('../../DTOs/generalResponse');
 const dtoGetExtension = require('../../DTOs/admin/extension/getRequest');
-const dtoGetBranchExtension = require('../../DTOs/user/getBranchExtension');
 const dtoInsertExtension = require('../../DTOs/admin/extension/insertRequest');
 const dtoUpdateExtension = require('../../DTOs/admin/extension/updateRequest');
 const extensionRepository = require('../../repositories/admin/extensionRespository');

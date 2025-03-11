@@ -13,6 +13,7 @@ class UpdateRequest extends Validation{
     //Asigna a cada propiedad el valor correspondiente recibido en la peticion
     this.id = Number(params.id);
     this.fk_idBranch = Number(body.branch);
+    this.email = body.email.trim();
     this.employeeName = body.employee.trim();
     this.fk_idArea = Number(body.area);
     this.position = body.position.trim();
@@ -26,6 +27,7 @@ class UpdateRequest extends Validation{
     //retorna el objeto con los datos a actualizar
     return {
       fk_idBranch: this.fk_idBranch,
+      email: this.email,
       employeeName: this.employeeName,
       fk_idArea: this.fk_idArea,
       position: this.position,

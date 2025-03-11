@@ -7,6 +7,13 @@ const schema = Joi.object({
     'number.integer': 'La sucursal debe ser un número entero',
     'number.positive': 'La sucursal debe ser un número positivo'
   }),
+  email: Joi.string()
+  .email({minDomainSegments:2, tlds:{allow:['com']}}).pattern(/@nissanrancagua\.[a-z]+$/i)
+  .trim().required().messages({
+    'string.email':'El formato del correo es incorrecto',
+    'string.pattern.base': 'Dominio del correo incorrecto',
+    'string.empty': 'El correo es requerido'
+  }),
   employeeName: Joi.string().trim().pattern(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{2,50}$/).required().messages({
     'string.empty': 'El nombre del empleado es requerido', 
     'string.pattern.base': 'El nombre del empleado no debe contener números ni caracteres especiales',

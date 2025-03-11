@@ -69,7 +69,7 @@ class TableManager {
 
   async setRowData(row) {
     await this.initializeSelects();
-    const elements = ['branch', 'employee', 'area', 'position', 'extension'];
+    const elements = ['branch', 'email', 'employee', 'area', 'position', 'extension'];
     elements.forEach(element => {
       const span = row.querySelector(`.${element}`);
       const input = row.querySelector(`.t${element.charAt(0).toUpperCase() + element.slice(1)}`);
@@ -188,11 +188,16 @@ document.addEventListener('DOMContentLoaded', async () => {
         const url = `${API_ENDPOINTS.getExtension}?${new URLSearchParams(Object.fromEntries(formData))}`;
         const { data } = await fetchData(url);
         event.target.reset();
-        document.getElementById('bodyExtensions').innerHTML = data.map(extension => `
+        document.getElementById('bodyExtensions').innerHTML = data.map(extension => {
+          return `
           <tr class='editable-row' id='${extension.id}'>
             <td data-title='Sucursal'>
               <span data-id='${extension.branch.id}' class='branch'>${extension.branch.branchName}</span>
               <select class='branch-extension tBranch' name='sucursal' required style='display:none;'></select>
+            </td>
+            <td data-title='Correo'>
+              <span data-id='${extension.email}' class='email'>${extension.email}</span>
+              <input class='tEmail' type='email' name='email' required style='display:none;'>
             </td>
             <td data-title='Nombre'>
               <span class='employee'>${extension.employeeName}</span>
@@ -224,7 +229,7 @@ document.addEventListener('DOMContentLoaded', async () => {
               </button>
             </td>
           </tr>
-        `).join('');
+        `}).join('');
         tableManager.initializeEvents();
       } catch (error) {
         Message.alertMessage(error.message);
@@ -240,6 +245,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       const row = button.closest('tr');
       const data = {
         branch: row.querySelector('.tBranch').value,
+        email: row.querySelector('.tEmail').value,
         employee: row.querySelector('.tEmployee').value,
         area: row.querySelector('.tArea').value,
         position: row.querySelector('.tPosition').value,

@@ -37,6 +37,16 @@ const nameBranches = (params) => {
   return params.get('sucursal');
 }
 
+const formatEmail = (email) =>{
+  return email.replace(/@/g,"&commat;").replace(/\./g,"&period;");
+}
+
+const createMailtoEmail = (event, email ) =>{
+  event.preventDefault();
+  const mailtoLink = `mailto:${email}`;
+  window.location.href = mailtoLink;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const params = new URLSearchParams(window.location.search);
   const subTitle = nameBranches(params);
@@ -52,16 +62,27 @@ document.addEventListener('DOMContentLoaded', () => {
       const formData = new FormData(event.target); 
       const dataPlain = Object.fromEntries(formData.entries());
       const url = `/v1/user/getBranchExtension/${encodeURIComponent(sucursal)}?${new URLSearchParams(dataPlain)}`;
-        const { data } = await fetchData(url);
-        document.getElementById('extensionList').innerHTML = data.map(extension => `
+      const { data } = await fetchData(url);
+      document.getElementById('extensionList').innerHTML = data.map(extension => {
+        const formattedEmail  = formatEmail(extension.email)
+        return `
           <tr>
+            <td data-title='Correo'>
+              <a class = "email-link" href="#" data-mail=${extension.email}>
+              ${formattedEmail}</a>
+            </td>
             <td data-title='Nombre'>${extension.employeeName}</td>
             <td data-title='Área'>${extension.area.areaName}</td>
-            <td data-title='Área'>${extension.position}</td>
+            <td data-title='Posición'>${extension.position}</td>
             <td data-title='Extensión'>${extension.extension}</td>
           </tr>
-        `).join('');
-    });
+        `}).join('');
+      document.querySelectorAll('.email-link').forEach(email =>{
+        email.addEventListener('click', (e) =>{
+          createMailtoEmail(e, email.getAttribute('data-email'));
+        })
+      })
+  });
   }catch(error){
     console.log(error);
     Message.errorMessage("Error al realizar la búsqueda");

@@ -41,6 +41,10 @@ router.get('/viewAdmin',requiresAuth(),extensionController.viewAdmin);
  *                       branch:
  *                         type: integer
  *                         description: Número de sucursal
+ *                       email:
+ *                         type: string
+ *                         format: email
+ *                         description: Correo electrónico del empleado
  *                       employee:
  *                         type: string
  *                         description: Nombre del empleado
@@ -92,6 +96,7 @@ router.get('/getExtension',requiresAuth(),extensionController.getExtension);
  *             type: object
  *             required:
  *               - branch
+ *               - email
  *               - employee
  *               - area
  *               - position
@@ -100,6 +105,10 @@ router.get('/getExtension',requiresAuth(),extensionController.getExtension);
  *               branch:
  *                 type: integer
  *                 description: Número de sucursal
+ *               email:
+ *                 type: string
+ *                 format: email
+ *                 description: Correo electrónico del empleado
  *               employee:
  *                 type: string
  *                 description: Nombre del empleado
@@ -169,6 +178,7 @@ router.post('/insertExtension',requiresAuth(),extensionController.insertExtensio
  *             type: object
  *             required:
  *               - branch
+ *               - email
  *               - employee
  *               - area
  *               - position
@@ -177,6 +187,10 @@ router.post('/insertExtension',requiresAuth(),extensionController.insertExtensio
  *               branch:
  *                 type: integer
  *                 description: Número de sucursal
+ *               email:
+ *                 type: string
+ *                 format: email
+ *                 description: Correo electrónico del empleado
  *               employee:
  *                 type: string
  *                 description: Nombre del empleado

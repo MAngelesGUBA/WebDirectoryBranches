@@ -46,6 +46,10 @@ router.get('/viewExtension', async (req, res) => {
  *                       branch:
  *                         type: integer
  *                         description: Número de sucursal
+ *                       email:
+ *                         type: string
+ *                         format: email
+ *                         description: Correo electrónico del empleado
  *                       employee:
  *                         type: string
  *                         description: Nombre del empleado

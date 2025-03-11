@@ -14,6 +14,7 @@ class InsertRequest extends Validation{
     super(schema);
     //Asigna a cada propiedad el valor correspondiente recibido en la peticion
     this.fk_idBranch = Number(body.branch);
+    this.email = body.email.trim();
     this.employeeName = body.employee.trim();
     this.fk_idArea = Number(body.area);
     this.position = body.position.trim();
@@ -23,6 +24,7 @@ class InsertRequest extends Validation{
   getInsertData(){
     return {
       fk_idBranch: this.fk_idBranch,
+      email: this.email,
       employeeName: this.employeeName,
       fk_idArea: this.fk_idArea,
       position: this.position,
