@@ -7,7 +7,7 @@ const extensionController = require('../../controllers/admin/extensionController
 const {requiresAuth} = require('express-openid-connect');
 
 //VISTA DE ADMINISTRADOR ------------------------------------------------------------------------
-router.get('/viewAdmin',requiresAuth(),extensionController.viewAdmin);
+router.get('/adminBranchesExtensions',requiresAuth(),extensionController.viewAdmin);
 
 //ENDPOINTS DE EXTENSIONES ----------------------------------------------------------------------
 /**

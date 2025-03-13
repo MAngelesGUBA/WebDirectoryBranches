@@ -108,6 +108,7 @@ nav .menu .menu-item.info{
   margin-left: 35px;
 }
 
+
 /*INFO DE SOPORTE*/
 .info-support{
   padding: 0;
@@ -271,6 +272,25 @@ main{
   transform: translateY(-5px);
   box-shadow: 0 4px 8px var(--black-nissan);
   border: 0;
+}
+
+/*Busqueda por todas las sucursales*/
+
+.busqueda-sucursales{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 55px;
+  width: 100%;
+}
+
+.busqueda-sucursales h2{
+  width: 100%;
+  text-align: center;
+  font-family: var(--font-headers-titles);
+  font-size: 32px;
+  margin: 5px;
 }
 
 

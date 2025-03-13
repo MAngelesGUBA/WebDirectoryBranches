@@ -1,8 +1,9 @@
 const generalResponse = require('../../DTOs/generalResponse');
-const dtoGetExtension = require('../../DTOs/admin/extension/getRequest');
+const dtoGetExtension = require('../../DTOs/getRequest');
 const dtoInsertExtension = require('../../DTOs/admin/extension/insertRequest');
 const dtoUpdateExtension = require('../../DTOs/admin/extension/updateRequest');
 const extensionRepository = require('../../repositories/admin/extensionRespository');
+const generalRepository = require('../../repositories/generalExtensions');
 const area_branchRepository = require('../../repositories/admin/area_branchRepository'); 
 
 //ENDPOINTS VISTAS -----------------------------------------------------------------------------
@@ -30,7 +31,7 @@ const getExtension = async(req, res) =>{
     }
 
     //Se obtienen los registros de la base de datos
-    const extension = await extensionRepository.getExtension(dtoGet.getQuery());
+    const extension = await generalRepository.getExtension(dtoGet.getQuery());
     //Si no hay registros, se envía un mensaje de error
     if(extension.length === 0){
       return response.sendErrorMessage(404, 'No se encontraron registros', null);

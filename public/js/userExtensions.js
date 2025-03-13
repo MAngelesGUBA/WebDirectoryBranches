@@ -77,10 +77,10 @@ document.addEventListener('DOMContentLoaded', () => {
             <td data-title='Extensión'>${extension.extension}</td>
           </tr>
         `}).join('');
+      });
       document.querySelectorAll('.email-link').forEach(email =>{
         email.addEventListener('click', (e) =>{
-          createMailtoEmail(e, email.getAttribute('data-email'));
-        })
+        createMailtoEmail(e, email.getAttribute('data-email'));
       })
   });
   }catch(error){

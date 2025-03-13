@@ -196,7 +196,7 @@ document.addEventListener('DOMContentLoaded', async () => {
               <select class='branch-extension tBranch' name='sucursal' required style='display:none;'></select>
             </td>
             <td data-title='Correo'>
-              <span data-id='${extension.email}' class='email'>${extension.email}</span>
+              <span class='email'>${extension.email}</span>
               <input class='tEmail' type='email' name='email' required style='display:none;'>
             </td>
             <td data-title='Nombre'>

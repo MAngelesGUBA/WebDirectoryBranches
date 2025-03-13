@@ -11,8 +11,6 @@ class Message{
   };
   
   static async successMessage(message){
-    this.setElementAttributes()
-    this.setImageAltText()
     return await Swal.fire({
       icon:"success",
       title: "Operación exitosa",
@@ -21,18 +19,14 @@ class Message{
   }
 
   static alertMessage(error){
-    this.setElementAttributes()
-    this.setImageAltText()
     return Swal.fire({
       icon: "warning",
       title: "OOPS!",
-      text: error
+      text: error,
     });
   };
 
   static errorMessage(error){
-    this.setElementAttributes()
-    this.setImageAltText()
     return Swal.fire({
       icon: "error",
       title: "Error",
@@ -41,16 +35,13 @@ class Message{
   };
 
   static async confirmationMessage(accion) {
-    this.setElementAttributes()
-    this.setImageAltText()
     const result = await Swal.fire({
-      title: `¿Está seguro de ${accion} este registro?`,
-      showDenyButton: true,
-      confirmButtonText: accion,
-      denyButtonText: 'Cancelar',
-      focusDeny: true
+        title: `¿Está seguro de ${accion} este registro?`,
+        showDenyButton: true,
+        confirmButtonText: accion,
+        denyButtonText: 'Cancelar',
+        focusDeny: true
     });
     return result.isConfirmed;
-  };
 }
-
+}

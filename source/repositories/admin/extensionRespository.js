@@ -44,34 +44,6 @@ const findByNumExtension = async (numExtension) =>{
 /* C R U D --> EXTENSIONS ---------------------------------*/
 
 /**
- * @param {string} query - query to search
- * @returns {Promise<object[]>} existing record | null
- * @throws {Error} throw an error if it happens
- */
-//Obetener extensiones ***********************
-const getExtension = async (search) =>{
-  try{
-    const extension = await prisma.extension.findMany({
-      where:{
-        OR: [
-          {employeeName: {contains: search, mode: 'insensitive'}},
-          {position: {contains: search, mode: 'insensitive'}},
-          {area:{areaName_Unaccent: {contains: search, mode: 'insensitive'}}},
-          {branch:{branchName_Unaccent:{contains:search, mode:'insensitive'}}}
-        ]
-      },
-      include:{
-        area:true,
-        branch:true
-      } 
-    })
-    return extension;
-  }catch(error){
-    throw error;
-  }
-}
-
-/**
  * 
  * @param {object} dataExtension - data to insert
  * @returns {Promise<number>} id of new extension
@@ -124,7 +96,6 @@ const deleteExtension = async(id) =>{
 module.exports = {
   findByNumExtension,
   findExtensionById,
-  getExtension,
   insertExtension,
   updateExtension,
   deleteExtension

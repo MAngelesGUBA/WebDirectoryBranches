@@ -1,5 +1,5 @@
-const schema = require('../../../utils/searchSchema');
-const Validation = require('../../../utils/validationClass');
+const schema = require('../utils/searchSchema');
+const Validation = require('../utils/validationClass');
 
 class GetRequest extends Validation{
   /**

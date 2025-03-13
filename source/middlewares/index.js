@@ -24,8 +24,6 @@ const setUpMiddlewares = (app)=>{
   setUpSwagger(app);
   // Configuración del SEO para la renderización de las vistas
   app.use(setUpSeo);
-
- 
 }
 
 module.exports = setUpMiddlewares;
