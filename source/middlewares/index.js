@@ -7,12 +7,12 @@ const setUpSwagger = require('./swagger');
 const setUpSeo = require('./seoConfig');
 //Ejecuta los middlewares importados
 const setUpMiddlewares = (app)=>{
+  //Configuracion de seguridad en headers
+  setUpHearders(app);
   //Configura la autenticacion de usuarios
   setUpAthentication(app); 
   //Configura el manejo de datos en el cuerpo de la solicitud 
   setUpBodyParser(app);
-  //Configuracion de seguridad en headers
-  setUpHearders(app);
   //Sirve los archivos estaticos
   setUpStaticAssets(app);
   //Configura la documentación de la API 
