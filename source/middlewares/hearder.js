@@ -1,7 +1,6 @@
 const helmet = require('helmet');
 
 const setUpHeaders = (app) => {
-  // Basic Helmet configuration
   app.use(
     helmet({
       // Hide X-Powered-By header
@@ -20,6 +19,21 @@ const setUpHeaders = (app) => {
       // Prevent clickjacking
       frameguard: {
         action: 'deny'
+      },
+
+      // Content Security Policy
+      contentSecurityPolicy: {
+        directives: {
+          defaultSrc: ["'self'"],
+          scriptSrc: ["'self'", "'unsafe-inline'", 'https://cdn.jsdelivr.net'],
+          styleSrc: ["'self'", "'unsafe-inline'", 'https://cdn.jsdelivr.net'],
+          imgSrc: ["'self'", 'data:', 'https:'],
+          connectSrc: ["'self'"],
+          fontSrc: ["'self'", 'https://cdn.jsdelivr.net'],
+          objectSrc: ["'none'"],
+          mediaSrc: ["'none'"],
+          frameSrc: ["'none'"]
+        }
       },
 
       // Disable features
@@ -45,13 +59,8 @@ const setUpHeaders = (app) => {
       crossOriginOpenerPolicy: { policy: 'same-origin' },
       crossOriginResourcePolicy: { policy: 'same-origin' },
 
-      // Remove Content-Security-Policy
-      contentSecurityPolicy: false,
-
-      // Remove X-Download-Options
+      // Remove legacy headers
       ieNoOpen: false,
-
-      // Remove X-XSS-Protection (modern browsers don't need it)
       xssFilter: false
     })
   );
