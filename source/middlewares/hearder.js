@@ -1,42 +1,60 @@
 const helmet = require('helmet');
 
 const setUpHeaders = (app) => {
-  app.use(helmet({
-    contentSecurityPolicy: {
-      directives: {
-        defaultSrc: ["'self'"],
-        scriptSrc: ["'self'", "https://cdn.jsdelivr.net"],
-        styleSrc: ["'self'", "'unsafe-inline'", "https://cdn.jsdelivr.net"],
-        imgSrc: ["'self'", "data:"],
-        connectSrc: ["'self'"],
-        frameAncestors: ["'none'"]
-      }
-    },
-    referrerPolicy: { policy: "strict-origin-when-cross-origin" },
-    permissionsPolicy: {
-      features: {
-        geolocation: [],
-        microphone: [],
-        camera: [],
-        fullscreen: []
-      }
-    },
-    hidePoweredBy: true, // Oculta "X-Powered-By"
-    frameguard: { action: "deny" }, // Equivalente a X-Frame-Options: DENY
-    xssFilter: true, // Protege contra ataques XSS
-    noSniff: true // Equivalente a X-Content-Type-Options: nosniff
-  }));
+  // Basic Helmet configuration
+  app.use(
+    helmet({
+      // Hide X-Powered-By header
+      hidePoweredBy: true,
 
-  // Agregar los encabezados que Helmet no maneja directamente
-  app.use((req, res, next) => {
-    res.setHeader('X-Permitted-Cross-Domain-Policies', 'none');
-    res.setHeader('Server', ''); // Limpiar "Server" para ocultar información
-    res.setHeader('X-Content-Type-Options', 'nosniff'); // Añadir el encabezado correcto
-    next();
-  });
+      // Strict Transport Security - only in production
+      hsts: process.env.NODE_ENV === 'production' ? {
+        maxAge: 31536000, // 1 year in seconds
+        includeSubDomains: true,
+        preload: true
+      } : false,
 
-  // Desactivar el encabezado X-Powered-By manualmente
-  app.disable('x-powered-by');
+      // Prevent browsers from trying to detect MIME types
+      noSniff: true,
+
+      // Prevent clickjacking
+      frameguard: {
+        action: 'deny'
+      },
+
+      // Disable features
+      permissionsPolicy: {
+        features: {
+          camera: ['none'],
+          geolocation: ['none'],
+          microphone: ['none'],
+          payment: ['none'],
+          usb: ['none'],
+          vibrate: ['none'],
+          notifications: ['none']
+        }
+      },
+
+      // Referrer policy
+      referrerPolicy: {
+        policy: 'strict-origin-when-cross-origin'
+      },
+
+      // Cross-origin policies
+      crossOriginEmbedderPolicy: false,
+      crossOriginOpenerPolicy: { policy: 'same-origin' },
+      crossOriginResourcePolicy: { policy: 'same-origin' },
+
+      // Remove Content-Security-Policy
+      contentSecurityPolicy: false,
+
+      // Remove X-Download-Options
+      ieNoOpen: false,
+
+      // Remove X-XSS-Protection (modern browsers don't need it)
+      xssFilter: false
+    })
+  );
 };
 
 module.exports = setUpHeaders;
