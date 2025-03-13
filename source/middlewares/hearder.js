@@ -31,9 +31,14 @@ const setUpHeaders = (app) => {
   app.use((req, res, next) => {
     res.setHeader('X-Permitted-Cross-Domain-Policies', 'none');
     res.setHeader('Server', ''); // Limpiar "Server" para ocultar información
+    res.setHeader('X-Content-Type-Options', 'nosniff'); // Añadir el encabezado correcto
     next();
   });
+
+  // Desactivar el encabezado X-Powered-By manualmente
+  app.disable('x-powered-by');
 };
 
 module.exports = setUpHeaders;
+
 
