@@ -104,6 +104,23 @@ nav .menu .menu-item{
   cursor: pointer;
 }
 
+nav .menu .menu-item.info{
+  margin-left: 35px;
+}
+
+/*INFO DE SOPORTE*/
+.info-support{
+  padding: 0;
+}
+.info-support li{
+  margin-bottom: 10px;
+  list-style: none;
+}
+
+.info-support li span{
+  font-weight: bold;
+}
+
 /*MENU DESPLEGABLE*/
 .dropdown-container {
   position: relative;
