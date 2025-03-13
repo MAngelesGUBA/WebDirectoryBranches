@@ -1,32 +1,36 @@
+const helmet = require('helmet');
+
 const setUpHeaders = (app) => {
+  app.use(helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        scriptSrc: ["'self'", "https://cdn.jsdelivr.net"],
+        styleSrc: ["'self'", "'unsafe-inline'", "https://cdn.jsdelivr.net"],
+        imgSrc: ["'self'", "data:"],
+        connectSrc: ["'self'"],
+        frameAncestors: ["'none'"]
+      }
+    },
+    referrerPolicy: { policy: "strict-origin-when-cross-origin" },
+    permissionsPolicy: {
+      features: {
+        geolocation: [],
+        microphone: [],
+        camera: [],
+        fullscreen: []
+      }
+    },
+    hidePoweredBy: true, // Oculta "X-Powered-By"
+    frameguard: { action: "deny" }, // Equivalente a X-Frame-Options: DENY
+    xssFilter: true, // Protege contra ataques XSS
+    noSniff: true // Equivalente a X-Content-Type-Options: nosniff
+  }));
+
+  // Agregar los encabezados que Helmet no maneja directamente
   app.use((req, res, next) => {
-    // Basic security headers
-    res.setHeader('X-Content-Type-Options', 'nosniff');
-    res.setHeader('X-Frame-Options', 'DENY');
     res.setHeader('X-Permitted-Cross-Domain-Policies', 'none');
-    res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
-
-    // Content Security Policy
-    res.setHeader('Content-Security-Policy', 
-      "default-src 'self'; " +
-      "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; " +
-      "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; " +
-      "img-src 'self'; " +
-      "connect-src 'self'"
-    );
-
-    // Modern Permissions Policy (replacing Feature-Policy)
-    res.setHeader('Permissions-Policy', 
-      "geolocation=(), " +
-      "microphone=(), " +
-      "camera=(), " +
-      "fullscreen=(self)"
-    );
-
-    // Clean up headers
-    res.setHeader('Server', '');
-    res.setHeader('X-Powered-By', '');
-
+    res.setHeader('Server', ''); // Limpiar "Server" para ocultar información
     next();
   });
 };
