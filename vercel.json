@@ -11,16 +11,5 @@
       "src": "/(.*)",
       "dest": "source/app.js"
     }
-  ],
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "X-Content-Type-Options",
-          "value": "nosniff"
-        }
-      ]
-    }
   ]
 }
