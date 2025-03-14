@@ -14,7 +14,7 @@ const setUpHeaders = (app) => {
       } : false,
 
       // Prevent browsers from trying to detect MIME types
-      xContentTypeOptions: nosniff,
+      xContentTypeOptions: true,
       //noSniff: true,
 
       // Prevent clickjacking
