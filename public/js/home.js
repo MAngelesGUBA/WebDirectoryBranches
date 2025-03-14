@@ -1,7 +1,5 @@
-const fetchData =  async(url, processMessage) =>{
-  let loadingSwal;
+const fetchData =  async(url) =>{
   try{
-    loadingSwal = Message.waitingMessage(processMessage);
     const response = await fetch(url);
     if(!response.ok){
       const errorData = await response.json();
@@ -10,8 +8,6 @@ const fetchData =  async(url, processMessage) =>{
     return await response.json();
   }catch(error){
     throw error;
-  }finally{
-    (loadingSwal).close();
   }
 };
 
@@ -41,47 +37,50 @@ const addHomeEventListeners  = ()=>{
   });
 };
 
-const formatEmail = (email) =>{
-  return email.replace(/@/g,"&commat;").replace(/\./g,"&period;");
-}
-
-const createMailtoEmail = (event, email ) =>{
-  event.preventDefault();
-  const mailtoLink = `mailto:${email}`;
-  window.location.href = mailtoLink;
-}
+// Función personalizada para renderizar extensiones
+const renderExtensions = (data) => {
+  return data.map(extension =>{
+    return `
+      <tr>
+        <td data-title='Sucursal'>${extension.branch.branchName}</td>
+        <td data-title='Coreo'>
+          <a class="email-link" href="mailto:${extension.email}">
+          ${extension.email}
+          </a>
+        </td>
+        <td data-title='Nombre'>${extension.employeeName}</td>
+        <td data-title='Área'>${extension.area.areaName}</td>
+        <td data-title='Puesto'>${extension.position}</td>
+        <td data-title='Extensión'>${extension.extension}</td>
+      </tr>
+    `;
+  }).join('');
+};
 
 document.addEventListener('DOMContentLoaded',()=>{
   //Redireccion a las sucursales ------------------------------
   addHomeEventListeners();
+
   //Busqueda de todas las sucursales ------------------------------
-  const searchForm = document.getElementById('frmSearch');
-  searchForm.addEventListener('submit', async (event)=>{
+  document.getElementById('frmSearch').addEventListener('submit', async (event)=>{
     event.preventDefault();
-    const processMessage = `Realizando la búsqueda, Espere un momento...`;
+    let loadingSwal;
+    const title = 'Realizando la búsqueda';
+    const message = ' Espere un momento...';
+
     try{
       const formData = new FormData(event.target);
       const url = `/v1/user/getAllExtensions?${new URLSearchParams(Object.fromEntries(formData))}`;
-      const {data} = await fetchData(url, processMessage);
-      document.getElementById('extensionList').innerHTML = data.map(extension =>{
-        const formattedEmail = formatEmail(extension.email); 
-        return`
-          <tr>
-            <td data-title='Sucursal'>${extension.branch.branchName}</td>
-            <td data-title='Coreo'>
-              <a class="email-link" href="#" data-email=${extension.email}>
-                ${formattedEmail}
-              </a>
-            </td>
-            <td data-title='Nombre'>${extension.employeeName}</td>
-            <td data-title='Área'>${extension.area.areaName}</td>
-            <td data-title='Puesto'>${extension.position}</td>
-            <td data-title='Extensión'>${extension.extension}</td>
-          </tr>
-        `;
-      }).join('');
+      
+      loadingSwal = Message.waitingMessage(title,message);
+      const {data} = await fetchData(url);
+      event.target.reset();
+
+      new UpdatePageTable(data,renderExtensions);
     }catch(error){
       Message.alertMessage(error.message);
+    }finally{
+      (loadingSwal).close();
     }
   })
 });

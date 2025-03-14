@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
  * @throws {Error} throw an error if it happens
  */
 //Obetener extensiones ***********************
-const getExtension = async (search) =>{
+const getExtension = async (search, page=1) =>{
   try{
     const extension = await prisma.extension.findMany({
       where:{
@@ -20,7 +20,7 @@ const getExtension = async (search) =>{
       include:{
         area:true,
         branch:true
-      } 
+      }
     })
     return extension;
   }catch(error){

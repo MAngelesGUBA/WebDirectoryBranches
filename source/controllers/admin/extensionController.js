@@ -22,7 +22,7 @@ const getExtension = async(req, res) =>{
   try{
     //Instancia de la clase dtoGetArea
     const dtoGet = new dtoGetExtension(req.query);
-  
+    
     //Validación de los datos
     const error = dtoGet.validate(); 
     //Si hay error en la validación, se envía un mensaje de error
