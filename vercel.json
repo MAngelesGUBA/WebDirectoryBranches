@@ -9,18 +9,11 @@
   "routes":[
     {
       "src":"/(.*)",
-      "dest":"source/app.js"
-    }
-  ],
-  "headers":[
-    {
-      "source":"/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=0, must-revalidate"
-        }
-      ]
+      "dest":"source/app.js",
+      "headers": {
+        "Cache-Control":"public, max-age=0, must-revalidate",
+        "X-Content-Type-Options":"nosniff"
+      }
     }
   ]
 }
