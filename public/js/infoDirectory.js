@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded',()=>{
   //Modal info
-  const info = document.getElementById('infoApp');
+  const info = document.getElementById('menuInfo');
   info.addEventListener('click', ()=>{
     Swal.fire({
       title: "Información de soporte",

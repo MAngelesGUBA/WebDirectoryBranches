@@ -8,10 +8,6 @@ const setUpSeo = require('./seoConfig');
 
 //Ejecuta los middlewares importados
 const setUpMiddlewares = (app)=>{
-  app.use((req, res, next) => {
-    res.setHeader('X-Content-Type-Options', 'nosniff');
-    next();
-  });
   //Configuracion de seguridad en headers
   setUpHearders(app);
   //Configura la autenticacion de usuarios

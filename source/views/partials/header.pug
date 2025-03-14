@@ -5,21 +5,21 @@ header
       if isAuthenticated && viewName === 'viewsAdminExtensions'
         a.logout(href="/logout") Logout
       if viewName !== 'home' && viewName === 'viewUserExtensions'
-        a(class='menu-item' onclick="window.location.href='/v1/home'") Home
+        a#menuHome(class='menu-item' href='#') Home
         .dropdown-container
           ul
             li.sucursales-li Sucursales 
               ul
                 li.content-top-li
-                  a(onclick="window.location.href='/v1/user/viewExtension?sucursal=Colima'") Colima
+                  a#menuColima(class='menu-item') Colima
                 li
-                  a(onclick="window.location.href='/v1/user/viewExtension?sucursal=Manzanillo'") Manzanillo
+                  a#menuManzanillo(class='menu-item') Manzanillo
                 li
-                  a(onclick="window.location.href='/v1/user/viewExtension?sucursal=Tecoman'") Tecomán
+                  a#menuTecoman(class='menu-item') Tecomán
                 li
-                  a(onclick="window.location.href='/v1/user/viewExtension?sucursal=Villa'") Villa de Álvarez
+                  a#menuVilla(class='menu-item') Villa de Álvarez
                 li
-                  a(onclick="window.location.href='/v1/user/viewExtension?sucursal=Guzman'") Guzmán
+                  a#menuGuzman(class='menu-item') Guzmán
                 li.content-bottom-li
-                  a(onclick="window.location.href='/v1/user/viewExtension?sucursal=Autlan'") Autlán
-        a(id='infoApp' class='menu-item info') Info
+                  a#menuAutlan(class='menu-item') Autlán
+        a#menuInfo(class='menu-item info') Info

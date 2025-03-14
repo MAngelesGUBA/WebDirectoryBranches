@@ -15,37 +15,30 @@ const fetchData =  async(url, processMessage) =>{
   }
 };
 
-const redirectBranches = ()=>{
-  const colima = document.getElementById('branchColima');
-  colima.addEventListener('click',()=>{
+const addHomeEventListeners  = ()=>{
+  document.getElementById('branchColima').addEventListener('click',()=>{
     window.location.href='/v1/user/branchExtensions?sucursal=Colima';
   });
 
-  const manzanillo = document.getElementById('branchManzanillo');
-  manzanillo.addEventListener('click',()=>{
+  document.getElementById('branchManzanillo').addEventListener('click',()=>{
     window.location.href='/v1/user/branchExtensions?sucursal=Manzanillo';
   });
 
-  const tecoman = document.getElementById('branchTecoman');
-  tecoman.addEventListener('click',()=>{
+  document.getElementById('branchTecoman').addEventListener('click',()=>{
     window.location.href='/v1/user/branchExtensions?sucursal=Tecoman';
   });
 
-  const villa = document.getElementById('branchVilla');
-  villa.addEventListener('click',()=>{
+  document.getElementById('branchVilla').addEventListener('click',()=>{
     window.location.href='/v1/user/branchExtensions?sucursal=Villa';
   });
 
-  const guzman = document.getElementById('branchGuzman');
-  guzman.addEventListener('click',()=>{
+  document.getElementById('branchGuzman').addEventListener('click',()=>{
     window.location.href='/v1/user/branchExtensions?sucursal=Guzman';
   });
 
-  const autlan = document.getElementById('branchAutlan');
-  autlan.addEventListener('click',()=>{
+  document.getElementById('branchAutlan').addEventListener('click',()=>{
     window.location.href='/v1/user/branchExtensions?sucursal=Autlan';
   });
-
 };
 
 const formatEmail = (email) =>{
@@ -60,7 +53,7 @@ const createMailtoEmail = (event, email ) =>{
 
 document.addEventListener('DOMContentLoaded',()=>{
   //Redireccion a las sucursales ------------------------------
-  redirectBranches();
+  addHomeEventListeners();
   //Busqueda de todas las sucursales ------------------------------
   const searchForm = document.getElementById('frmSearch');
   searchForm.addEventListener('submit', async (event)=>{
@@ -90,6 +83,5 @@ document.addEventListener('DOMContentLoaded',()=>{
     }catch(error){
       Message.errorMessage("Error al realizar la búsqueda", error.Message);
     }
-
   })
 });
