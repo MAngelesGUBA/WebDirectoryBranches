@@ -14,7 +14,8 @@ const setUpHeaders = (app) => {
       } : false,
 
       // Prevent browsers from trying to detect MIME types
-      noSniff: true,
+      xContentTypeOptions: nosniff,
+      //noSniff: true,
 
       // Prevent clickjacking
       frameguard: {
@@ -62,7 +63,7 @@ const setUpHeaders = (app) => {
       // Remove legacy headers
       ieNoOpen: false,
       xssFilter: false
-    }).xContentTypeOptions()
+    })
   );
 };
 
