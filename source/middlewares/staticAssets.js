@@ -8,11 +8,7 @@ const setUpStaticAssets = (app) =>{
     Express.static --> se encarga de servir archivos estaticos para
     acceder a ellos desde las rutas del servidor
    */
-  app.use('/assets',express.static(path.join(__dirname, '../../public'),{
-    setHeaders: (res, path) => {
-      res.setHeader('X-Content-Type-Options', 'nosniff');
-    }
-  })); 
+  app.use('/assets',express.static(path.join(__dirname, '../../public'))); 
 }
 
 module.exports = setUpStaticAssets; 

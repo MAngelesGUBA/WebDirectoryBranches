@@ -62,7 +62,7 @@ const setUpHeaders = (app) => {
       // Remove legacy headers
       ieNoOpen: false,
       xssFilter: false
-    })
+    }).xContentTypeOptions()
   );
 };
 

@@ -14,7 +14,7 @@ const fetchData = async (url, options = {}) => {
     const response = await fetch(url, options);
     if (!response.ok){
       const errorData = await response.json();
-      throw new Error(errorData.error || errorData.message || 'Error en la solicitud');
+      throw new Error(errorData.error || errorData.message || 'Ocurrió un error');
     }
     return await response.json();
   } catch (error) {

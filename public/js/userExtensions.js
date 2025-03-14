@@ -1,19 +1,17 @@
-const fetchData = async (url, options = {}) => {
+const fetchData =  async(url, processMessage) =>{
   let loadingSwal;
-  try {
-    loadingSwal = Message.waitingMessage("Realizando la búsqueda","Espere un momento...");
-
-    const response = await fetch(url, options);
-    if (!response.ok) {
+  try{
+    loadingSwal = Message.waitingMessage(processMessage);
+    const response = await fetch(url);
+    if(!response.ok){
       const errorData = await response.json();
-      Message.alertMessage(errorData.error || "Error en la solicitud");
-      throw new Error(errorData.error || "Error en la solicitud");
+      throw new Error(errorData.error || errorData.message || 'Ocurrió un error');
     }
     return await response.json();
-  } catch (error) {
+  }catch(error){
     throw error;
-  } finally {
-    (loadingSwal).close(); 
+  }finally{
+    (loadingSwal).close();
   }
 };
 
@@ -51,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const params = new URLSearchParams(window.location.search);
   const subTitle = nameBranches(params);
   document.getElementById('branchSubTitle').innerHTML += ` ${subTitle}`;
-
+  const processMessage = `Realizando la búsqueda, Espere un momento...`;
   try{
     document.getElementById('searchForm').addEventListener('submit', async (event) => {
       event.preventDefault();
@@ -62,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const formData = new FormData(event.target); 
       const dataPlain = Object.fromEntries(formData.entries());
       const url = `/v1/user/getBranchExtension/${encodeURIComponent(sucursal)}?${new URLSearchParams(dataPlain)}`;
-      const { data } = await fetchData(url);
+      const { data } = await fetchData(url, processMessage);
       document.getElementById('extensionList').innerHTML = data.map(extension => {
         const formattedEmail  = formatEmail(extension.email)
         return `
@@ -85,6 +83,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   }catch(error){
     console.log(error);
-    Message.errorMessage("Error al realizar la búsqueda");
+    Message.alertMessage(error.message);
   }
 });

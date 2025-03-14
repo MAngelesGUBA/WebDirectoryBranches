@@ -4,8 +4,8 @@ const fetchData =  async(url, processMessage) =>{
     loadingSwal = Message.waitingMessage(processMessage);
     const response = await fetch(url);
     if(!response.ok){
-      const errorData = await response.json().error;
-      throw new Error(errorData || 'Error en la solicitud');
+      const errorData = await response.json();
+      throw new Error(errorData.error || errorData.message || 'Ocurrió un error');
     }
     return await response.json();
   }catch(error){
@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   const searchForm = document.getElementById('frmSearch');
   searchForm.addEventListener('submit', async (event)=>{
     event.preventDefault();
-    processMessage = "Realizando la búsqueda","Espere un momento...";
+    const processMessage = `Realizando la búsqueda, Espere un momento...`;
     try{
       const formData = new FormData(event.target);
       const url = `/v1/user/getAllExtensions?${new URLSearchParams(Object.fromEntries(formData))}`;
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded',()=>{
         `;
       }).join('');
     }catch(error){
-      Message.errorMessage("Error al realizar la búsqueda", error.Message);
+      Message.alertMessage(error.message);
     }
   })
 });
